@@ -4,7 +4,7 @@ services:
     container_name: tm_app
     command: >
       sh -c "make migrate &&
-             make render-start"
+             uv run gunicorn -b 0.0.0.0:8000 task_manager.wsgi"
     volumes:
       - tm_app_data:/app
     env_file:
