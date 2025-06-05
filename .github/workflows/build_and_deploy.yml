@@ -73,7 +73,7 @@ jobs:
 
       - name: Create migrate
         run: |
-          python manage.py migrate
+          make migrate
 
       - name: Run PyTest
         env:
