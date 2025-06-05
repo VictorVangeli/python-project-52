@@ -33,7 +33,7 @@ generate-ru-local:
 	uv run django-admin makemessages -l ru
 
 render-start:
-	gunicorn task_manager.wsgi
+	uv run gunicorn task_manager.wsgi
 
 build:
 	./build.sh
