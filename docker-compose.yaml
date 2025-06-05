@@ -6,7 +6,7 @@ services:
              python manage.py migrate &&
              gunicorn -w 5 -b 0.0.0.0:8000 task_manager.wsgi"
     ports:
-      - 8000:8000
+      - 8010:8000
     volumes:
       - tm_app_data:/app
     env_file:
@@ -36,6 +36,9 @@ services:
 #      - ./caddy/caddy_data:/data
 #      - ./caddy/caddy_config:/config
 
+volumes:
+  tm_app_data:
+    
 networks:
   default:
     name: caddy_net

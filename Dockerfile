@@ -10,10 +10,36 @@ ENV PYTHONUNBUFFERED 1
 
 # install dependencies
 RUN pip install --upgrade pip && pip install uv
-COPY pyproject.toml uv.lock* /app/
+COPY . /app/
 RUN uv venv && uv sync
 
 # copy project
-COPY . /app/
 
 EXPOSE 8000
+
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+~                                                                                                                                                                                
+"Dockerfile" 20L, 388B                                                                                                                                         14,21        Весь
