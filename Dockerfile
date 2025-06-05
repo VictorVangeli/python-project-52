@@ -10,6 +10,7 @@ ENV PYTHONUNBUFFERED 1
 
 # install dependencies
 RUN pip install --upgrade pip && pip install uv
+COPY pyproject.toml uv.lock* /app/
 RUN uv venv && uv sync
 
 # copy project
