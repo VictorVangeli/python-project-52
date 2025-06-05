@@ -1,0 +1,42 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "username": "ValentinaLux",
+      "first_name": "Valentina",
+      "last_name": "Hodyakova",
+      "password": "MestnayaCarica"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "username": "ChickBreak",
+      "first_name": "Evgeniy",
+      "last_name": "Markov",
+      "password": "StopWord!"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "username": "Blazhenniy",
+      "first_name": "Ivan",
+      "last_name": "Kruchina",
+      "password": "111111"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 4,
+    "fields": {
+      "username": "VoltanF",
+      "first_name": "Semen",
+      "last_name": "Valterhint",
+      "password": "TrueOrFalse?"
+    }
+  }
+]

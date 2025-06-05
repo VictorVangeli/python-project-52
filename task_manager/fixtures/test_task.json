@@ -1,0 +1,28 @@
+{
+  "create": {
+    "valid": {
+      "name": "Finished write test",
+      "description": "It is time",
+      "executor": 2,
+      "status": 1
+    },
+    "missing_fields": {
+      "name": "",
+      "description": "",
+      "executor": "",
+      "status": ""
+    },
+    "exists": {
+      "name": "Start last project",
+      "description": "",
+      "executor": 2,
+      "status": 1
+    }
+  },
+  "update": {
+      "name": "Completed tests",
+      "description": "",
+      "executor": 2,
+      "status": 2
+    }
+}

@@ -1,0 +1,10 @@
+https://task-manager-52.pupsidian.ru {
+    tls your@gmail.com
+
+    log {
+        output stdout
+        level WARN
+    }
+
+    reverse_proxy tm_app:8000
+}

@@ -1,0 +1,56 @@
+{
+  "create": {
+    "valid": {
+      "username": "LeoStart",
+      "first_name": "Leonid",
+      "last_name": "Starica",
+      "password1": "Qwerty123456!",
+      "password2": "Qwerty123456!"
+    },
+    "missing_fields": {
+      "password1": "Qwerty123456!",
+      "password2": "Qwerty123456!"
+    },
+    "invalid": {
+      "username": "Le@1<",
+      "first_name": "Leonid",
+      "last_name": "Starica",
+      "password1": "Qwerty123456!",
+      "password2": "Qwerty123456!"
+    },
+    "exists": {
+      "username": "ValentinaLux",
+      "first_name": "Valentina",
+      "last_name": "Hodyakova",
+      "password": "MestnayaCarica"
+    },
+    "pass_missing": {
+      "username": "LeoStart",
+      "first_name": "Leonid",
+      "last_name": "Starica",
+      "password1": "",
+      "password2": ""
+    },
+    "pass_not_match": {
+      "username": "LeoStart",
+      "first_name": "Leonid",
+      "last_name": "Starica",
+      "password1": "Qwerty123456",
+      "password2": "Qwerty123446"
+    },
+    "pass_too_short": {
+      "username": "LeoStart",
+      "first_name": "Leonid",
+      "last_name": "Starica",
+      "password1": "Qw",
+      "password2": "Qw"
+    }
+  },
+  "update": {
+    "username": "LeoEnd",
+    "first_name": "Evlampiy",
+    "last_name": "Starica",
+    "password1": "Qwerty123456!",
+    "password2": "Qwerty123456!"
+  }
+}

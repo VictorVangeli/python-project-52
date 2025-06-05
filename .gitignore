@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+.idea
+*.pyc
+.python-version
+.env
+Caddyfile
+.DS_Store
+/staticfiles/
