@@ -9,26 +9,21 @@ class TestListLabels(LabelTestCase):
         Test that the label list view is accessible to an authenticated user.
         Verifies the response status and that the correct template is used.
         """
-        response = self.client.get(reverse_lazy('labels'))
+        response = self.client.get(reverse_lazy("labels"))
 
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(
-            response,
-            template_name='labels/labels.html'
-        )
+        self.assertTemplateUsed(response, template_name="labels/labels.html")
 
     def test_labels_content(self) -> None:
         """
         Test that the label list view returns the correct number of labels.
         Verifies that the labels in the context match the expected queryset.
         """
-        response = self.client.get(reverse_lazy('labels'))
+        response = self.client.get(reverse_lazy("labels"))
 
-        self.assertEqual(len(response.context['labels']), self.count)
+        self.assertEqual(len(response.context["labels"]), self.count)
         self.assertQuerySetEqual(
-            response.context['labels'],
-            self.labels,
-            ordered=False
+            response.context["labels"], self.labels, ordered=False
         )
 
     def test_labels_links(self) -> None:
@@ -36,13 +31,13 @@ class TestListLabels(LabelTestCase):
         Test that the label list page contains links to create, update, and delete labels.
         Verifies the presence of these links for each label in the response content.
         """
-        response = self.client.get(reverse_lazy('labels'))
+        response = self.client.get(reverse_lazy("labels"))
 
-        self.assertContains(response, '/labels/create/')
+        self.assertContains(response, "/labels/create/")
 
         for pk in range(1, self.count + 1):
-            self.assertContains(response, f'/labels/{pk}/update/')
-            self.assertContains(response, f'/labels/{pk}/delete/')
+            self.assertContains(response, f"/labels/{pk}/update/")
+            self.assertContains(response, f"/labels/{pk}/delete/")
 
     def test_labels_not_logged_in_view(self) -> None:
         """
@@ -50,10 +45,10 @@ class TestListLabels(LabelTestCase):
         """
         self.client.logout()
 
-        response = self.client.get(reverse_lazy('labels'))
+        response = self.client.get(reverse_lazy("labels"))
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('login'))
+        self.assertRedirects(response, reverse_lazy("login"))
 
 
 class TestCreateLabelView(LabelTestCase):
@@ -62,10 +57,10 @@ class TestCreateLabelView(LabelTestCase):
         Test that the label creation view is accessible to an authenticated user.
         Verifies the response status and that the correct template is used.
         """
-        response = self.client.get(reverse_lazy('label_create'))
+        response = self.client.get(reverse_lazy("label_create"))
 
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='form.html')
+        self.assertTemplateUsed(response, template_name="form.html")
 
     def test_create_label_not_logged_in_view(self) -> None:
         """
@@ -73,10 +68,10 @@ class TestCreateLabelView(LabelTestCase):
         """
         self.client.logout()
 
-        response = self.client.get(reverse_lazy('label_create'))
+        response = self.client.get(reverse_lazy("label_create"))
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('login'))
+        self.assertRedirects(response, reverse_lazy("login"))
 
 
 class TestUpdateLabelView(LabelTestCase):
@@ -86,11 +81,11 @@ class TestUpdateLabelView(LabelTestCase):
         Verifies the response status and that the correct template is used.
         """
         response = self.client.get(
-            reverse_lazy('label_update', kwargs={'pk': 2})
+            reverse_lazy("label_update", kwargs={"pk": 2})
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='form.html')
+        self.assertTemplateUsed(response, template_name="form.html")
 
     def test_update_not_logged_in_view(self) -> None:
         """
@@ -99,11 +94,11 @@ class TestUpdateLabelView(LabelTestCase):
         self.client.logout()
 
         response = self.client.get(
-            reverse_lazy('label_update', kwargs={'pk': 2})
+            reverse_lazy("label_update", kwargs={"pk": 2})
         )
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('login'))
+        self.assertRedirects(response, reverse_lazy("login"))
 
 
 class TestDeleteLabelView(LabelTestCase):
@@ -113,11 +108,13 @@ class TestDeleteLabelView(LabelTestCase):
         Verifies the response status and that the correct template is used.
         """
         response = self.client.get(
-            reverse_lazy('label_delete', kwargs={'pk': 3})
+            reverse_lazy("label_delete", kwargs={"pk": 3})
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='labels/delete_label.html')
+        self.assertTemplateUsed(
+            response, template_name="labels/delete_label.html"
+        )
 
     def test_delete_label_not_logged_in_view(self) -> None:
         """
@@ -126,8 +123,8 @@ class TestDeleteLabelView(LabelTestCase):
         self.client.logout()
 
         response = self.client.get(
-            reverse_lazy('label_delete', kwargs={'pk': 3})
+            reverse_lazy("label_delete", kwargs={"pk": 3})
         )
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('login'))
+        self.assertRedirects(response, reverse_lazy("login"))

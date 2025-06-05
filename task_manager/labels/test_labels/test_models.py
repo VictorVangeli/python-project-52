@@ -10,13 +10,12 @@ class LabelModelTest(LabelTestCase):
         Test that a new label can be successfully created with valid data.
         Verifies the instance type, string representation, and field value.
         """
-        label_data = self.test_label['create']['valid'].copy()
+        label_data = self.test_label["create"]["valid"].copy()
 
         label = Label.objects.create(
-            name=label_data['name'],
-            created_at=timezone.now()
+            name=label_data["name"], created_at=timezone.now()
         )
 
         self.assertTrue(isinstance(label, Label))
-        self.assertEqual(label.__str__(), label_data['name'])
-        self.assertEqual(label.name, label_data['name'])
+        self.assertEqual(label.__str__(), label_data["name"])
+        self.assertEqual(label.name, label_data["name"])

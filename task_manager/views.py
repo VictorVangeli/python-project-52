@@ -13,13 +13,15 @@ class IndexView(TemplateView):
 
     This view renders the main index page and sets the page title in the context.
     """
-    template_name = 'index.html'
+
+    template_name = "index.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = _('Task manager')
+        context["title"] = _("Task manager")
         return context
-        
+
+
 class UserLoginView(SuccessMessageMixin, LoginView):
     """
     Handle user login.
@@ -27,15 +29,17 @@ class UserLoginView(SuccessMessageMixin, LoginView):
     Renders the login form, authenticates the user, and redirects to the home page upon success.
     Adds title and button text to the template context.
     """
-    template_name = 'form.html'
-    next_page = reverse_lazy('home')
-    success_message = _('You are logged in')
+
+    template_name = "form.html"
+    next_page = reverse_lazy("home")
+    success_message = _("You are logged in")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = _('Login')
-        context['button_text'] = _('Enter')
+        context["title"] = _("Login")
+        context["button_text"] = _("Enter")
         return context
+
 
 class UserLogoutView(LogoutView):
     """
@@ -44,12 +48,14 @@ class UserLogoutView(LogoutView):
     Logs the user out and redirects to the home page.
     Displays an informational message upon logout.
     """
-    next_page = reverse_lazy('home')
+
+    next_page = reverse_lazy("home")
 
     def dispatch(self, request, *args, **kwargs):
-        messages.info(request, _('You are logged out'))
+        messages.info(request, _("You are logged out"))
         return super().dispatch(request, *args, **kwargs)
-    
+
+
 def test_rollbar_view(request):
     """
     Test Rollbar integration by triggering an intentional error.

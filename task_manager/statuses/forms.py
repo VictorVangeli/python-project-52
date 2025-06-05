@@ -5,12 +5,8 @@ from .models import Status
 
 
 class StatusForm(forms.ModelForm):
-
-    name = forms.CharField(
-        max_length=150, required=True, label=_("Name")
-    )
+    name = forms.CharField(max_length=150, required=True, label=_("Name"))
 
     class Meta:
         model = Status
-        fields = ('name',)
-        
+        fields = ("name",)

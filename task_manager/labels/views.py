@@ -14,14 +14,15 @@ class LabelsListView(AuthRequiredMixin, ListView):
 
     Authorisation required.
     """
-    template_name = 'labels/labels.html'
+
+    template_name = "labels/labels.html"
     model = Label
-    context_object_name = 'labels'
+    context_object_name = "labels"
 
     def get_context_data(self, **kwargs):
         context = {
             **super().get_context_data(**kwargs),
-            'title': _('Labels'),
+            "title": _("Labels"),
         }
         return context
 
@@ -32,17 +33,18 @@ class LabelCreateView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
 
     Authorisation required.
     """
-    template_name = 'form.html'
+
+    template_name = "form.html"
     model = Label
     form_class = LabelForm
-    success_url = reverse_lazy('labels')
-    success_message = _('Label successfully created')
+    success_url = reverse_lazy("labels")
+    success_message = _("Label successfully created")
 
     def get_context_data(self, **kwargs):
         context = {
             **super().get_context_data(**kwargs),
-            'title': _('Create label'),
-            'button_text': _('Create'),
+            "title": _("Create label"),
+            "button_text": _("Create"),
         }
         return context
 
@@ -53,41 +55,45 @@ class LabelUpdateView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
 
     Authorisation required.
     """
-    template_name = 'form.html'
+
+    template_name = "form.html"
     model = Label
     form_class = LabelForm
-    success_url = reverse_lazy('labels')
-    success_message = _('Label successfully changed')
+    success_url = reverse_lazy("labels")
+    success_message = _("Label successfully changed")
 
     def get_context_data(self, **kwargs):
         context = {
             **super().get_context_data(**kwargs),
-            'title': _('Change label'),
-            'button_text': _('Change'),
+            "title": _("Change label"),
+            "button_text": _("Change"),
         }
         return context
 
 
-class LabelDeleteView(AuthRequiredMixin, DeleteProtectionMixin,
-                      SuccessMessageMixin, DeleteView):
+class LabelDeleteView(
+    AuthRequiredMixin, DeleteProtectionMixin, SuccessMessageMixin, DeleteView
+):
     """
     Delete existing label.
 
     Authorization required.
     If the label is associated with at least one task it cannot be deleted.
     """
-    template_name = 'labels/delete_label.html'
+
+    template_name = "labels/delete_label.html"
     model = Label
-    success_url = reverse_lazy('labels')
-    success_message = _('Label successfully deleted')
-    protected_message = _('It is not possible to delete a label because it '
-                          'is in use')
-    protected_url = reverse_lazy('labels')
+    success_url = reverse_lazy("labels")
+    success_message = _("Label successfully deleted")
+    protected_message = _(
+        "It is not possible to delete a label because it is in use"
+    )
+    protected_url = reverse_lazy("labels")
 
     def get_context_data(self, **kwargs):
         context = {
             **super().get_context_data(**kwargs),
-            'title': _('Delete label'),
-            'button_text': _('Yes, delete'),
+            "title": _("Delete label"),
+            "button_text": _("Yes, delete"),
         }
         return context

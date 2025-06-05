@@ -12,39 +12,31 @@ class TestCreateStatus(StatusTestCase):
         Test that a new status is successfully created via the create view with valid data.
         Verifies redirection, status count increment, and correctness of the created status.
         """
-        status_data = self.test_status['create']['valid'].copy()
+        status_data = self.test_status["create"]["valid"].copy()
         response = self.client.post(
-            reverse_lazy('status_create'),
-            data=status_data
+            reverse_lazy("status_create"), data=status_data
         )
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('statuses'))
+        self.assertRedirects(response, reverse_lazy("statuses"))
 
         self.assertEqual(Status.objects.count(), self.count + 1)
-        self.assertEqual(
-            Status.objects.last().name,
-            status_data['name']
-        )
+        self.assertEqual(Status.objects.last().name, status_data["name"])
 
     def test_create_fields_missing(self) -> None:
         """
         Test that status creation fails when required fields are missing.
         Verifies that form errors are returned and no new status is added to the database.
         """
-        status_data = self.test_status['create']['missing_fields'].copy()
+        status_data = self.test_status["create"]["missing_fields"].copy()
         response = self.client.post(
-            reverse_lazy('status_create'),
-            data=status_data
+            reverse_lazy("status_create"), data=status_data
         )
-        errors = response.context['form'].errors
-        error_help = _('This field is required.')
+        errors = response.context["form"].errors
+        error_help = _("This field is required.")
 
-        self.assertIn('name', errors)
-        self.assertEqual(
-            [error_help],
-            errors['name']
-        )
+        self.assertIn("name", errors)
+        self.assertEqual([error_help], errors["name"])
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Status.objects.count(), self.count)
@@ -54,17 +46,15 @@ class TestCreateStatus(StatusTestCase):
         Test that status creation fails when a status with the same name already exists.
         Verifies that a validation error is shown and no duplicate status is created.
         """
-        status_data = self.test_status['create']['exists'].copy()
+        status_data = self.test_status["create"]["exists"].copy()
         response = self.client.post(
-            reverse_lazy('status_create'),
-            data=status_data
+            reverse_lazy("status_create"), data=status_data
         )
-        errors = response.context['form'].errors
+        errors = response.context["form"].errors
 
-        self.assertIn('name', errors)
+        self.assertIn("name", errors)
         self.assertEqual(
-            [_('Status with this Name already exists.')],
-            errors['name']
+            [_("Status with this Name already exists.")], errors["name"]
         )
 
         self.assertEqual(response.status_code, 200)
@@ -75,20 +65,23 @@ class TestCreateStatus(StatusTestCase):
         Test that status creation fails when the 'name' field exceeds the maximum allowed length.
         Verifies that a validation error is returned and no new status is created.
         """
-        status_data = self.test_status['create']['valid'].copy()
-        status_data.update({'name': 'name' * 50})
+        status_data = self.test_status["create"]["valid"].copy()
+        status_data.update({"name": "name" * 50})
 
         response = self.client.post(
-            reverse_lazy('status_create'),
-            data=status_data
+            reverse_lazy("status_create"), data=status_data
         )
-        errors = response.context['form'].errors
+        errors = response.context["form"].errors
 
-        self.assertIn('name', errors)
+        self.assertIn("name", errors)
         self.assertEqual(
-            [_('Ensure this value has at most 150 characters '
-               f'(it has {len(status_data["name"])}).')],
-            errors['name']
+            [
+                _(
+                    "Ensure this value has at most 150 characters "
+                    f"(it has {len(status_data['name'])})."
+                )
+            ],
+            errors["name"],
         )
 
         self.assertEqual(response.status_code, 200)
@@ -101,19 +94,17 @@ class TestUpdateStatus(StatusTestCase):
         Test that an existing status can be successfully updated with valid data.
         Verifies redirection, unchanged count, and updated field value.
         """
-        status_data = self.test_status['update'].copy()
+        status_data = self.test_status["update"].copy()
         response = self.client.post(
-            reverse_lazy('status_update', kwargs={'pk': 2}),
-            data=status_data
+            reverse_lazy("status_update", kwargs={"pk": 2}), data=status_data
         )
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('statuses'))
+        self.assertRedirects(response, reverse_lazy("statuses"))
 
         self.assertEqual(Status.objects.count(), self.count)
         self.assertEqual(
-            Status.objects.get(id=self.status2.id).name,
-            status_data['name']
+            Status.objects.get(id=self.status2.id).name, status_data["name"]
         )
 
     def test_update_status_not_logged_in(self) -> None:
@@ -123,19 +114,17 @@ class TestUpdateStatus(StatusTestCase):
         """
         self.client.logout()
 
-        status_data = self.test_status['update'].copy()
+        status_data = self.test_status["update"].copy()
         response = self.client.post(
-            reverse_lazy('status_update', kwargs={'pk': 2}),
-            data=status_data
+            reverse_lazy("status_update", kwargs={"pk": 2}), data=status_data
         )
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('login'))
+        self.assertRedirects(response, reverse_lazy("login"))
 
         self.assertEqual(Status.objects.count(), self.count)
         self.assertNotEqual(
-            Status.objects.get(id=self.status2.id).name,
-            status_data['name']
+            Status.objects.get(id=self.status2.id).name, status_data["name"]
         )
 
 
@@ -146,11 +135,11 @@ class TestDeleteStatus(StatusTestCase):
         Verifies redirection and confirms the status is removed from the database.
         """
         response = self.client.post(
-            reverse_lazy('status_delete', kwargs={'pk': 3})
+            reverse_lazy("status_delete", kwargs={"pk": 3})
         )
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('statuses'))
+        self.assertRedirects(response, reverse_lazy("statuses"))
         self.assertEqual(Status.objects.count(), self.count - 1)
         with self.assertRaises(ObjectDoesNotExist):
             Status.objects.get(id=self.status3.id)
@@ -163,11 +152,11 @@ class TestDeleteStatus(StatusTestCase):
         self.client.logout()
 
         response = self.client.post(
-            reverse_lazy('status_delete', kwargs={'pk': 3})
+            reverse_lazy("status_delete", kwargs={"pk": 3})
         )
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('login'))
+        self.assertRedirects(response, reverse_lazy("login"))
         self.assertEqual(Status.objects.count(), self.count)
 
     def test_delete_bound_status(self) -> None:
@@ -176,9 +165,9 @@ class TestDeleteStatus(StatusTestCase):
         Verifies redirection and that the status count remains unchanged.
         """
         response = self.client.post(
-            reverse_lazy('status_delete', kwargs={'pk': 1})
+            reverse_lazy("status_delete", kwargs={"pk": 1})
         )
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('statuses'))
+        self.assertRedirects(response, reverse_lazy("statuses"))
         self.assertEqual(Status.objects.count(), self.count)

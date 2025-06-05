@@ -36,7 +36,7 @@ Demonstration Access: [https://task-manager-52.pupsidian.ru](https://task-manage
 ```
 
 5. [OPTIONAL] If you needed web server:
-- Make a copy of the `Caddyfile.example` file and rename it to `Caddyfile`. 
+- Make a copy of the `Caddyfile.example` file and rename it to `Caddyfile`.
 - Replace the actual values for the following fields:
   - DOMAIN;
   - EMAIL;

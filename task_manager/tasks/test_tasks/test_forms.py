@@ -7,7 +7,7 @@ class TaskFormTest(TaskTestCase):
         """
         Test that the TaskForm is valid when provided with correct data.
         """
-        task_data = self.test_task['create']['valid'].copy()
+        task_data = self.test_task["create"]["valid"].copy()
         form = TaskForm(data=task_data)
 
         self.assertTrue(form.is_valid())
@@ -16,7 +16,7 @@ class TaskFormTest(TaskTestCase):
         """
         Test that the TaskForm is invalid when required fields are missing.
         """
-        task_data = self.test_task['create']['missing_fields'].copy()
+        task_data = self.test_task["create"]["missing_fields"].copy()
         form = TaskForm(data=task_data)
 
         self.assertFalse(form.is_valid())

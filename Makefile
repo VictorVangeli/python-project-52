@@ -30,7 +30,7 @@ run:
 	uv run python manage.py runserver
 
 generate-ru-local:
-	uv run django-admin makemessages -l ru  
+	uv run django-admin makemessages -l ru
 
 render-start:
 	gunicorn task_manager.wsgi

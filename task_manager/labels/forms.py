@@ -5,11 +5,8 @@ from .models import Label
 
 
 class LabelForm(forms.ModelForm):
-
-    name = forms.CharField(
-        max_length=150, required=True, label=_("Name")
-    )
+    name = forms.CharField(max_length=150, required=True, label=_("Name"))
 
     class Meta:
         model = Label
-        fields = ('name',)
+        fields = ("name",)

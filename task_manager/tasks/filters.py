@@ -7,16 +7,12 @@ from ..labels.models import Label
 
 
 class TaskFilter(FilterSet):
-
-    labels = ModelChoiceFilter(
-        queryset=Label.objects.all(),
-        label=_('Label')
-    )
+    labels = ModelChoiceFilter(queryset=Label.objects.all(), label=_("Label"))
 
     own_tasks = BooleanFilter(
-        label=_('Only own tasks'),
+        label=_("Only own tasks"),
         widget=forms.CheckboxInput,
-        method='get_own_tasks',
+        method="get_own_tasks",
     )
 
     def get_own_tasks(self, queryset, name, value):
@@ -27,4 +23,4 @@ class TaskFilter(FilterSet):
 
     class Meta:
         model = Task
-        fields = ['status', 'executor']
+        fields = ["status", "executor"]

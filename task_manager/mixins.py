@@ -13,12 +13,13 @@ class AuthRequiredMixin(LoginRequiredMixin):
     Displays an error message and redirects to the login page
     if the user is not authenticated.
     """
-    auth_message = _('You are not logged in! Please log in.')
+
+    auth_message = _("You are not logged in! Please log in.")
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             messages.error(request, self.auth_message)
-            return redirect(reverse_lazy('login'))
+            return redirect(reverse_lazy("login"))
 
         return super().dispatch(request, *args, **kwargs)
 
@@ -30,6 +31,7 @@ class UserPermissionMixin(UserPassesTestMixin):
     Prevents users from modifying objects that they do not own.
     Displays an error message and redirects if permission is denied.
     """
+
     permission_message = None
     permission_url = None
 
@@ -38,7 +40,7 @@ class UserPermissionMixin(UserPassesTestMixin):
         Checks whether the current user is the owner of the object.
         """
         return self.get_object() == self.request.user
-    
+
     def handle_no_permission(self):
         """
         Handles the case where the user fails the ownership test.
@@ -56,6 +58,7 @@ class DeleteProtectionMixin:
     Prevents deletion of an object if it is referenced by other related objects.
     Shows an error message and redirects if deletion is not allowed.
     """
+
     protected_message = None
     protected_url = None
 
@@ -74,6 +77,7 @@ class AuthorDeletionMixin(UserPassesTestMixin):
     Ensures that only the author of an object can delete it.
     Displays an error message and redirects if the current user is not the author.
     """
+
     author_message = None
     author_url = None
 
@@ -82,7 +86,7 @@ class AuthorDeletionMixin(UserPassesTestMixin):
         Check if the current user is the author of the object.
         """
         return self.get_object().author == self.request.user
-    
+
     def handle_no_permission(self):
         """
         Handle the case when the user is not the author.

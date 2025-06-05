@@ -5,26 +5,27 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django_filters.views import FilterView
 
 from task_manager.mixins import AuthRequiredMixin, AuthorDeletionMixin
-from task_manager.users.models import User
 from .models import Task
 from .forms import TaskForm
 from .filters import TaskFilter
 
 
 class TasksListView(AuthRequiredMixin, FilterView):
-    template_name = 'tasks/tasks.html'
+    template_name = "tasks/tasks.html"
     model = Task
     filterset_class = TaskFilter
-    context_object_name = 'tasks'
+    context_object_name = "tasks"
 
     def get_filterset(self, filterset_class):
-        return filterset_class(self.request.GET, queryset=self.get_queryset(), request=self.request)
+        return filterset_class(
+            self.request.GET, queryset=self.get_queryset(), request=self.request
+        )
 
     def get_context_data(self, **kwargs):
         context = {
             **super().get_context_data(**kwargs),
-            'title': _('Tasks'),
-            'button_text': _('Show'),
+            "title": _("Tasks"),
+            "button_text": _("Show"),
         }
         return context
 
@@ -35,14 +36,15 @@ class TaskDetailView(AuthRequiredMixin, DetailView):
 
     Authorisation required.
     """
-    template_name = 'tasks/show_task.html'
+
+    template_name = "tasks/show_task.html"
     model = Task
-    context_object_name = 'task'
+    context_object_name = "task"
 
     def get_context_data(self, **kwargs):
         context = {
             **super().get_context_data(**kwargs),
-            'title': _('Task preview'),
+            "title": _("Task preview"),
         }
         return context
 
@@ -53,17 +55,18 @@ class TaskCreateView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
 
     Authorisation required.
     """
-    template_name = 'form.html'
+
+    template_name = "form.html"
     model = Task
     form_class = TaskForm
-    success_url = reverse_lazy('tasks')
-    success_message = _('Task successfully created')
+    success_url = reverse_lazy("tasks")
+    success_message = _("Task successfully created")
 
     def get_context_data(self, **kwargs):
         context = {
             **super().get_context_data(**kwargs),
-            'title': _('Create task'),
-            'button_text': _('Create'),
+            "title": _("Create task"),
+            "button_text": _("Create"),
         }
         return context
 
@@ -81,40 +84,43 @@ class TaskUpdateView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
 
     Authorisation required.
     """
-    template_name = 'form.html'
+
+    template_name = "form.html"
     model = Task
     form_class = TaskForm
-    success_url = reverse_lazy('tasks')
-    success_message = _('Task successfully changed')
+    success_url = reverse_lazy("tasks")
+    success_message = _("Task successfully changed")
 
     def get_context_data(self, **kwargs):
         context = {
             **super().get_context_data(**kwargs),
-            'title': _('Task change'),
-            'button_text': _('Change'),
+            "title": _("Task change"),
+            "button_text": _("Change"),
         }
         return context
 
 
-class TaskDeleteView(AuthRequiredMixin, AuthorDeletionMixin,
-                     SuccessMessageMixin, DeleteView):
+class TaskDeleteView(
+    AuthRequiredMixin, AuthorDeletionMixin, SuccessMessageMixin, DeleteView
+):
     """
     Delete existing task.
 
     Authorization required.
     Only the author can delete his tasks.
     """
-    template_name = 'tasks/delete_task.html'
+
+    template_name = "tasks/delete_task.html"
     model = Task
-    success_url = reverse_lazy('tasks')
-    success_message = _('Task successfully deleted')
-    author_message = _('The task can be deleted only by its author')
-    author_url = reverse_lazy('tasks')
+    success_url = reverse_lazy("tasks")
+    success_message = _("Task successfully deleted")
+    author_message = _("The task can be deleted only by its author")
+    author_url = reverse_lazy("tasks")
 
     def get_context_data(self, **kwargs):
         context = {
             **super().get_context_data(**kwargs),
-            'title': _('Delete task'),
-            'button_text': _('Yes, delete'),
+            "title": _("Delete task"),
+            "button_text": _("Yes, delete"),
         }
         return context

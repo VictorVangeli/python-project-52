@@ -7,7 +7,7 @@ class LabelFormTest(LabelTestCase):
         """
         Test that the label form is valid when provided with correct input data.
         """
-        label_data = self.test_label['create']['valid'].copy()
+        label_data = self.test_label["create"]["valid"].copy()
         form = LabelForm(data=label_data)
 
         self.assertTrue(form.is_valid())
@@ -16,7 +16,7 @@ class LabelFormTest(LabelTestCase):
         """
         Test that the label form is invalid when required fields are missing.
         """
-        label_data = self.test_label['create']['missing_fields'].copy()
+        label_data = self.test_label["create"]["missing_fields"].copy()
         form = LabelForm(data=label_data)
 
         self.assertFalse(form.is_valid())

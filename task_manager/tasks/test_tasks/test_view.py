@@ -9,26 +9,21 @@ class TestListTasks(TaskTestCase):
         Test that the task list view is accessible to an authenticated user.
         Verifies the response status and that the correct template is used.
         """
-        response = self.client.get(reverse_lazy('tasks'))
+        response = self.client.get(reverse_lazy("tasks"))
 
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(
-            response,
-            template_name='tasks/tasks.html'
-        )
+        self.assertTemplateUsed(response, template_name="tasks/tasks.html")
 
     def test_tasks_content(self) -> None:
         """
         Test that the task list view returns the correct number of tasks for the user.
         Verifies the tasks in the context match the expected queryset.
         """
-        response = self.client.get(reverse_lazy('tasks'))
+        response = self.client.get(reverse_lazy("tasks"))
 
-        self.assertEqual(len(response.context['tasks']), self.count)
+        self.assertEqual(len(response.context["tasks"]), self.count)
         self.assertQuerySetEqual(
-            response.context['tasks'],
-            self.tasks,
-            ordered=False
+            response.context["tasks"], self.tasks, ordered=False
         )
 
     def test_tasks_links(self) -> None:
@@ -36,13 +31,13 @@ class TestListTasks(TaskTestCase):
         Test that the task list page contains links to create, update, and delete tasks.
         Verifies the presence of these links for each task in the response content.
         """
-        response = self.client.get(reverse_lazy('tasks'))
+        response = self.client.get(reverse_lazy("tasks"))
 
-        self.assertContains(response, '/tasks/create/')
+        self.assertContains(response, "/tasks/create/")
 
         for pk in range(1, self.count + 1):
-            self.assertContains(response, f'/tasks/{pk}/update/')
-            self.assertContains(response, f'/tasks/{pk}/delete/')
+            self.assertContains(response, f"/tasks/{pk}/update/")
+            self.assertContains(response, f"/tasks/{pk}/delete/")
 
     def test_tasks_not_logged_in_view(self) -> None:
         """
@@ -50,10 +45,10 @@ class TestListTasks(TaskTestCase):
         """
         self.client.logout()
 
-        response = self.client.get(reverse_lazy('tasks'))
+        response = self.client.get(reverse_lazy("tasks"))
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('login'))
+        self.assertRedirects(response, reverse_lazy("login"))
 
 
 class TestFilterTasks(TaskTestCase):
@@ -63,11 +58,10 @@ class TestFilterTasks(TaskTestCase):
         Verifies that only tasks with the specified status are included in the response.
         """
         response = self.client.get(
-            reverse_lazy('tasks'),
-            {'status': self.status1.pk}
+            reverse_lazy("tasks"), {"status": self.status1.pk}
         )
 
-        self.assertEqual(response.context['tasks'].count(), 2)
+        self.assertEqual(response.context["tasks"].count(), 2)
         self.assertContains(response, self.task1.name)
         self.assertContains(response, self.task2.name)
         self.assertNotContains(response, self.task3.name)
@@ -78,11 +72,10 @@ class TestFilterTasks(TaskTestCase):
         Verifies that only tasks assigned to the specified executor are displayed.
         """
         response = self.client.get(
-            reverse_lazy('tasks'),
-            {'executor': self.user1.pk}
+            reverse_lazy("tasks"), {"executor": self.user1.pk}
         )
 
-        self.assertEqual(response.context['tasks'].count(), 1)
+        self.assertEqual(response.context["tasks"].count(), 1)
         self.assertNotContains(response, self.task1.name)
         self.assertContains(response, self.task2.name)
 
@@ -92,11 +85,10 @@ class TestFilterTasks(TaskTestCase):
         Verifies that only tasks with the specified label are displayed.
         """
         response = self.client.get(
-            reverse_lazy('tasks'),
-            {'labels': self.label2.pk}
+            reverse_lazy("tasks"), {"labels": self.label2.pk}
         )
 
-        self.assertEqual(response.context['tasks'].count(), 1)
+        self.assertEqual(response.context["tasks"].count(), 1)
         self.assertNotContains(response, self.task1.name)
         self.assertNotContains(response, self.task2.name)
         self.assertContains(response, self.task3.name)
@@ -106,12 +98,9 @@ class TestFilterTasks(TaskTestCase):
         Test that the 'own tasks' filter returns only tasks created by the current user.
         Verifies that tasks created by others are excluded from the result.
         """
-        response = self.client.get(
-            reverse_lazy('tasks'),
-            {'own_tasks': 'on'}
-        )
+        response = self.client.get(reverse_lazy("tasks"), {"own_tasks": "on"})
 
-        self.assertEqual(response.context['tasks'].count(), 2)
+        self.assertEqual(response.context["tasks"].count(), 2)
         self.assertContains(response, self.task1.name)
         self.assertContains(response, self.task2.name)
         self.assertNotContains(response, self.task3.name)
@@ -123,29 +112,22 @@ class TestDetailedTask(TaskTestCase):
         Test that the detailed view of a task is accessible to an authenticated user.
         Verifies the response status and that the correct template is used.
         """
-        response = self.client.get(
-            reverse_lazy('task_show', kwargs={'pk': 3})
-        )
+        response = self.client.get(reverse_lazy("task_show", kwargs={"pk": 3}))
 
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(
-            response,
-            template_name='tasks/show_task.html'
-        )
+        self.assertTemplateUsed(response, template_name="tasks/show_task.html")
 
     def test_detailed_task_content(self) -> None:
         """
         Test that the detailed task view displays all relevant task information.
         Verifies the presence of update/delete links, task fields, and associated labels in the response.
         """
-        response = self.client.get(
-            reverse_lazy('task_show', kwargs={'pk': 3})
-        )
+        response = self.client.get(reverse_lazy("task_show", kwargs={"pk": 3}))
 
         labels = self.task3.labels.all()
 
-        self.assertContains(response, '/tasks/3/update/')
-        self.assertContains(response, '/tasks/3/delete/')
+        self.assertContains(response, "/tasks/3/update/")
+        self.assertContains(response, "/tasks/3/delete/")
 
         self.assertContains(response, self.task3.name)
         self.assertContains(response, self.task3.description)
@@ -162,12 +144,10 @@ class TestDetailedTask(TaskTestCase):
         """
         self.client.logout()
 
-        response = self.client.get(
-            reverse_lazy('task_show', kwargs={'pk': 3})
-        )
+        response = self.client.get(reverse_lazy("task_show", kwargs={"pk": 3}))
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('login'))
+        self.assertRedirects(response, reverse_lazy("login"))
 
 
 class TestCreateTaskView(TaskTestCase):
@@ -176,10 +156,10 @@ class TestCreateTaskView(TaskTestCase):
         Test that the task creation view is accessible to an authenticated user.
         Verifies the response status and that the correct template is used.
         """
-        response = self.client.get(reverse_lazy('task_create'))
+        response = self.client.get(reverse_lazy("task_create"))
 
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='form.html')
+        self.assertTemplateUsed(response, template_name="form.html")
 
     def test_create_task_not_logged_in_view(self) -> None:
         """
@@ -187,10 +167,10 @@ class TestCreateTaskView(TaskTestCase):
         """
         self.client.logout()
 
-        response = self.client.get(reverse_lazy('task_create'))
+        response = self.client.get(reverse_lazy("task_create"))
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('login'))
+        self.assertRedirects(response, reverse_lazy("login"))
 
 
 class TestUpdateTaskView(TaskTestCase):
@@ -200,11 +180,11 @@ class TestUpdateTaskView(TaskTestCase):
         Verifies the response status and that the correct template is used.
         """
         response = self.client.get(
-            reverse_lazy('task_update', kwargs={'pk': 2})
+            reverse_lazy("task_update", kwargs={"pk": 2})
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='form.html')
+        self.assertTemplateUsed(response, template_name="form.html")
 
     def test_update_not_logged_in_view(self) -> None:
         """
@@ -213,11 +193,11 @@ class TestUpdateTaskView(TaskTestCase):
         self.client.logout()
 
         response = self.client.get(
-            reverse_lazy('task_update', kwargs={'pk': 2})
+            reverse_lazy("task_update", kwargs={"pk": 2})
         )
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('login'))
+        self.assertRedirects(response, reverse_lazy("login"))
 
 
 class TestDeleteTaskView(TaskTestCase):
@@ -227,11 +207,13 @@ class TestDeleteTaskView(TaskTestCase):
         Verifies the response status and that the correct template is used.
         """
         response = self.client.get(
-            reverse_lazy('task_delete', kwargs={'pk': 1})
+            reverse_lazy("task_delete", kwargs={"pk": 1})
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='tasks/delete_task.html')
+        self.assertTemplateUsed(
+            response, template_name="tasks/delete_task.html"
+        )
 
     def test_delete_task_not_logged_in_view(self) -> None:
         """
@@ -240,11 +222,11 @@ class TestDeleteTaskView(TaskTestCase):
         self.client.logout()
 
         response = self.client.get(
-            reverse_lazy('task_delete', kwargs={'pk': 1})
+            reverse_lazy("task_delete", kwargs={"pk": 1})
         )
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('login'))
+        self.assertRedirects(response, reverse_lazy("login"))
 
     def test_delete_task_unauthorised_view(self) -> None:
         """
@@ -252,8 +234,8 @@ class TestDeleteTaskView(TaskTestCase):
         Verifies redirection to the task list page.
         """
         response = self.client.get(
-            reverse_lazy('task_delete', kwargs={'pk': 3})
+            reverse_lazy("task_delete", kwargs={"pk": 3})
         )
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('tasks'))
+        self.assertRedirects(response, reverse_lazy("tasks"))

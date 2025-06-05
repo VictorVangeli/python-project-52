@@ -8,8 +8,8 @@ from task_manager.users.models import User
 @test_english
 @remove_rollbar
 class StatusTestCase(TestCase):
-    fixtures = ['user.json', 'status.json', 'task.json', 'label.json']
-    test_status = load_data('test_status.json')
+    fixtures = ["user.json", "status.json", "task.json", "label.json"]
+    test_status = load_data("test_status.json")
 
     def setUp(self) -> None:
         self.client = Client()

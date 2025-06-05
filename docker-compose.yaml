@@ -24,7 +24,7 @@ services:
       - /var/lib/postgres
     ports:
       - "5432:5432"
-  
+
 #  caddy:
 #    image: caddy:latest
 #    restart: unless-stopped

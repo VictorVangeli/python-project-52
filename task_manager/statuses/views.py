@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -17,14 +15,15 @@ class StatusesListView(AuthRequiredMixin, ListView):
 
     Authorization required.
     """
-    template_name = 'statuses/statuses.html'
+
+    template_name = "statuses/statuses.html"
     model = Status
-    context_object_name = 'statuses'
+    context_object_name = "statuses"
 
     def get_context_data(self, **kwargs):
         context = {
             **super().get_context_data(**kwargs),
-            'title': _('Statuses'),
+            "title": _("Statuses"),
         }
         return context
 
@@ -35,18 +34,18 @@ class StatusCreateView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
 
     Authorisation required.
     """
-    template_name = 'form.html'
+
+    template_name = "form.html"
     model = Status
     form_class = StatusForm
-    success_url = reverse_lazy('statuses')
-    success_message = _('Status successfully created')
-
+    success_url = reverse_lazy("statuses")
+    success_message = _("Status successfully created")
 
     def get_context_data(self, **kwargs):
         context = {
             **super().get_context_data(**kwargs),
-            'title': _('Create status'),
-            'button_text': _('Create'),
+            "title": _("Create status"),
+            "button_text": _("Create"),
         }
         return context
 
@@ -57,40 +56,45 @@ class StatusUpdateView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
 
     Authorisation required.
     """
-    template_name = 'form.html'
+
+    template_name = "form.html"
     model = Status
     form_class = StatusForm
-    success_url = reverse_lazy('statuses')
-    success_message = _('Status successfully changed')
+    success_url = reverse_lazy("statuses")
+    success_message = _("Status successfully changed")
 
     def get_context_data(self, **kwargs):
         context = {
             **super().get_context_data(**kwargs),
-            'title': _('Change status'),
-            'button_text': _('Change'),
+            "title": _("Change status"),
+            "button_text": _("Change"),
         }
         return context
 
-class StatusDeleteView(AuthRequiredMixin, DeleteProtectionMixin,
-                       SuccessMessageMixin, DeleteView):
+
+class StatusDeleteView(
+    AuthRequiredMixin, DeleteProtectionMixin, SuccessMessageMixin, DeleteView
+):
     """
     Delete existing status.
 
     Authorization required.
     If the status is associated with at least one task it cannot be deleted.
     """
-    template_name = 'statuses/delete_status.html'
+
+    template_name = "statuses/delete_status.html"
     model = Status
-    success_url = reverse_lazy('statuses')
-    success_message = _('Status successfully deleted')
-    protected_message = _('It is not possible to delete a status '
-                          'because it is in use')
-    protected_url = reverse_lazy('statuses')
+    success_url = reverse_lazy("statuses")
+    success_message = _("Status successfully deleted")
+    protected_message = _(
+        "It is not possible to delete a status because it is in use"
+    )
+    protected_url = reverse_lazy("statuses")
 
     def get_context_data(self, **kwargs):
         context = {
             **super().get_context_data(**kwargs),
-            'title': _('Delete status'),
-            'button_text': _('Yes, delete'),
+            "title": _("Delete status"),
+            "button_text": _("Yes, delete"),
         }
         return context
