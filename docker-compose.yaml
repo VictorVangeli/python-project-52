@@ -22,7 +22,7 @@ services:
       - POSTGRES_DB=tm_db
     volumes:
       - /var/lib/postgres
-  
+
 #  caddy:
 #    image: caddy:latest
 #    restart: unless-stopped
