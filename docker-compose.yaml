@@ -38,7 +38,7 @@ services:
 
 volumes:
   tm_app_data:
-    
+
 networks:
   default:
     name: caddy_net
