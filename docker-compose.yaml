@@ -3,8 +3,7 @@ services:
     image: ghcr.io/victorvangeli/python-project-52:latest
     container_name: tm_app
     command: >
-      sh -c "python manage.py makemigrations &&
-             python manage.py migrate &&
+      sh -c "python manage.py migrate &&
              gunicorn -w 5 -b 0.0.0.0:8000 task_manager.wsgi"
     ports:
       - "8010:8000"

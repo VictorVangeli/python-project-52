@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED 1
 # install dependencies
 RUN pip install --upgrade pip && pip install uv
 COPY . /app/
-RUN uv venv && uv sync
+RUN uv sync
 
 # copy project
 
