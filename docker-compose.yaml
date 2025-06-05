@@ -5,8 +5,6 @@ services:
     command: >
       sh -c "make migrate &&
              make render-start"
-    ports:
-      - "8010:8000"
     volumes:
       - tm_app_data:/app
     env_file:
@@ -24,9 +22,7 @@ services:
       - POSTGRES_DB=tm_db
     volumes:
       - /var/lib/postgres
-    ports:
-      - "5432:5432"
-
+  
 #  caddy:
 #    image: caddy:latest
 #    restart: unless-stopped
