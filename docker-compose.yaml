@@ -19,7 +19,9 @@ services:
     image: postgres:16.8-alpine
     restart: always
     environment:
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=tm_pan
+      - POSTGRES_PASSWORD=tm_pass
+      - POSTGRES_DB=tm_db
     volumes:
       - /var/lib/postgres
     ports:
