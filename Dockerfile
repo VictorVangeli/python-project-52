@@ -16,30 +16,3 @@ RUN uv venv && uv sync
 # copy project
 
 EXPOSE 8000
-
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-"Dockerfile" 20L, 388B                                                                                                                                         14,21        Весь
