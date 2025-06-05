@@ -84,7 +84,7 @@ jobs:
           
   build-and-push:
     runs-on: self-hosted
-    needs: linter
+    needs: tests
 
     steps:
       - name: Checkout repository
