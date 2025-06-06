@@ -36,7 +36,7 @@ jobs:
     runs-on: self-hosted
     needs: linter
     env:
-      USE_POSTGRES: False
+      DATABASE_URL: sqlite:///db:sqlite3
       DOMAIN: http://localhost:8000
       SECRET_KEY: THIS-VERY-STRONG-SECRET-KEY
 
