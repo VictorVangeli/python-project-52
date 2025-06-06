@@ -119,9 +119,6 @@ jobs:
     needs: build-and-push
 
     runs-on: self-hosted
-    container:
-      image: catthehacker/ubuntu:act-22.04
-
     steps:
       - name: Deploy on THIS VPS WHERE mounted GIT Runner
         run: |

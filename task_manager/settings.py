@@ -39,8 +39,16 @@ ALLOWED_HOSTS = [
     "webserver",
     "task-manager-52.pupsidian.ru",
     "127.0.0.1",
+    "0.0.0.0",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost",
+    "http://webserver",
+    "https://task-manager-52.pupsidian.ru",
+    "http://127.0.0.1",
+    "http://0.0.0.0",
+]
 
 # Application definition
 
@@ -125,10 +133,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-if os.getenv("LANGUAGE"):
-    LANGUAGE_CODE = os.getenv("LANGUAGE")
-else:
-    LANGUAGE_CODE = "ru-ru"
+LANGUAGE_CODE = "ru-ru"
 
 
 LANGUAGES = (
