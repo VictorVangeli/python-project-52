@@ -21,35 +21,32 @@ Demonstration Access: [https://task-manager-52.pupsidian.ru](https://task-manage
    • Navigate to the directory where you want to clone the repository;
    • Run the following command:
 
-```bash
->> git clone https://github.com/VictorVangeli/python-project-52 && cd python-project-52
-```
+    ```bash
+    >> git clone https://github.com/VictorVangeli/python-project-52 && cd python-project-52
+    ```
 
 3. Make a copy of the .env.example file and rename it to .env.
 
 4. Insert the actual values for the following fields:
-```dotenv
-	•	SECRET_KEY
-	•	USE_POSTGRES
-	•	DOMAIN
-	•	ROLLBAR_ACCESS_TOKEN (optional)
-```
+    -	SECRET_KEY
+    -	DOMAIN
+    -	ROLLBAR_ACCESS_TOKEN (optional)
 
 5. [OPTIONAL] If you needed web server:
-- Make a copy of the `Caddyfile.example` file and rename it to `Caddyfile`.
-- Replace the actual values for the following fields:
-  - DOMAIN;
-  - EMAIL;
-- To uncomment the `caddy` service in `docker-compose.yml`, you need to remove the # symbols in front of its configuration.
+    - Make a copy of the `Caddyfile.example` file and rename it to `Caddyfile`.
+    - Replace the actual values for the following fields:
+      - DOMAIN;
+      - EMAIL;
+    - To uncomment the `caddy` service in `docker-compose.yml`, you need to remove the # symbols in front of its configuration.
 
 6. Start docker compose
-```shell
->> docker compose up -d
-```
+    ```shell
+    >> docker compose up -d
+    ```
 
 7. Before using the application, you need to create superuser:
-```bash
-docker compose exec tm_app uv run python manage.py createsuperuser
-```
+    ```bash
+    docker compose exec tm_app uv run python manage.py createsuperuser
+    ```
 
 8. After this manipulation you can go to website which you wrote in field `DOMAIN`
