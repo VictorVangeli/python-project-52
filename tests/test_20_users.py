@@ -50,7 +50,7 @@ class TestUser:
 
         page.click('text="Пользователи"')
         row_selector = (
-            f"*css=tr >> text=\"{DATA['users']['existing']['full_name']}\""
+            f'*css=tr >> text="{DATA["users"]["existing"]["full_name"]}"'
         )
         assert page.query_selector(row_selector) is not None
         row = page.query_selector(row_selector)
@@ -100,7 +100,7 @@ class TestUser:
 
         page.click('text="Пользователи"')
         row_selector = (
-            f"*css=tr >> text=\"{DATA['users']['existing']['full_name']}\""
+            f'*css=tr >> text="{DATA["users"]["existing"]["full_name"]}"'
         )
         assert page.query_selector(row_selector) is not None
         row = page.query_selector(row_selector)

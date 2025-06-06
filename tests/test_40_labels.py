@@ -44,9 +44,7 @@ class TestLabel:
 
         page.goto("/labels/")
 
-        row_selector = (
-            f"*css=tr >> text=\"{DATA['labels']['existing']['name']}\""
-        )
+        row_selector = f'*css=tr >> text="{DATA["labels"]["existing"]["name"]}"'
         assert page.query_selector(row_selector) is not None
         row = page.query_selector(row_selector)
         link_selector = 'text="Изменить"'
@@ -75,9 +73,7 @@ class TestLabel:
 
         page.goto("/labels/")
 
-        row_selector = (
-            f"*css=tr >> text=\"{DATA['labels']['existing']['name']}\""
-        )
+        row_selector = f'*css=tr >> text="{DATA["labels"]["existing"]["name"]}"'
         assert page.query_selector(row_selector) is not None
         row = page.query_selector(row_selector)
         link_selector = 'text="Удалить"'

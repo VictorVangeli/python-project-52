@@ -45,7 +45,7 @@ class TestTaskStatus:
         page.goto("/statuses/")
 
         row_selector = (
-            f"*css=tr >> text=\"{DATA['task_statuses']['existing']['name']}\""
+            f'*css=tr >> text="{DATA["task_statuses"]["existing"]["name"]}"'
         )
         assert page.query_selector(row_selector) is not None
         row = page.query_selector(row_selector)
@@ -76,7 +76,7 @@ class TestTaskStatus:
         page.goto("/statuses/")
 
         row_selector = (
-            f"*css=tr >> text=\"{DATA['task_statuses']['existing']['name']}\""
+            f'*css=tr >> text="{DATA["task_statuses"]["existing"]["name"]}"'
         )
         assert page.query_selector(row_selector) is not None
         row = page.query_selector(row_selector)

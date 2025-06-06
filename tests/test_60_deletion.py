@@ -39,7 +39,7 @@ class TestTask:
         login(page, context)
 
         page.goto("/users/")
-        row_selector = f"*css=tr >> text=\"{USERS[0]['username']}\""
+        row_selector = f'*css=tr >> text="{USERS[0]["username"]}"'
         assert page.query_selector(row_selector) is not None
         row = page.query_selector(row_selector)
         link_selector = 'text="Удалить"'
@@ -56,7 +56,7 @@ class TestTask:
         self.create_task(page, context, base_url)
 
         page.goto("/statuses/")
-        row_selector = f"*css=tr >> text=\"{DATA['tasks']['first']['status']}\""
+        row_selector = f'*css=tr >> text="{DATA["tasks"]["first"]["status"]}"'
         assert page.query_selector(row_selector) is not None
         row = page.query_selector(row_selector)
         link_selector = 'text="Удалить"'
@@ -80,7 +80,7 @@ class TestTask:
 
         page.goto("/labels/")
         row_selector = (
-            f"*css=tr >> text=\"{DATA['tasks']['first']['labels']['first']}\""
+            f'*css=tr >> text="{DATA["tasks"]["first"]["labels"]["first"]}"'
         )
         assert page.query_selector(row_selector) is not None
         row = page.query_selector(row_selector)
@@ -106,7 +106,7 @@ class TestTask:
         login(page, context)
 
         page.goto("/tasks/")
-        row_selector = f"*css=tr >> text=\"{DATA['tasks']['first']['name']}\""
+        row_selector = f'*css=tr >> text="{DATA["tasks"]["first"]["name"]}"'
         assert page.query_selector(row_selector) is not None
         row = page.query_selector(row_selector)
         link_selector = 'text="Удалить"'

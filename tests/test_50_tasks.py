@@ -39,7 +39,7 @@ class TestTask:
         assert re.search(r"Задача успешно создана", page.text_content(".alert"))
         assert DATA["tasks"]["first"]["name"] in page.content()
 
-        page.click(f"text=\"{DATA['tasks']['first']['name']}\"")
+        page.click(f'text="{DATA["tasks"]["first"]["name"]}"')
         page.wait_for_load_state()
 
         assert DATA["tasks"]["first"]["name"] in page.content()
@@ -197,7 +197,7 @@ class TestTask:
 
         assert DATA["tasks"]["first"]["name"] in page.content()
 
-        row_selector = f"*css=tr >> text=\"{DATA['tasks']['first']['name']}\""
+        row_selector = f'*css=tr >> text="{DATA["tasks"]["first"]["name"]}"'
         assert page.query_selector(row_selector) is not None
         row = page.query_selector(row_selector)
         link_selector = 'text="Изменить"'
@@ -224,10 +224,10 @@ class TestTask:
             == DATA["tasks"]["first"]["executor"]
         )
         assert page.query_selector(
-            f"#id_labels >> option:checked >> text=\"{DATA['tasks']['first']['labels']['first']}\"",  # noqa: E501
+            f'#id_labels >> option:checked >> text="{DATA["tasks"]["first"]["labels"]["first"]}"',  # noqa: E501
         )
         assert page.query_selector(
-            f"#id_labels >> option:checked >> text=\"{DATA['tasks']['first']['labels']['third']}\"",  # noqa: E501
+            f'#id_labels >> option:checked >> text="{DATA["tasks"]["first"]["labels"]["third"]}"',  # noqa: E501
         )
 
         page.fill('text="Имя"', DATA["tasks"]["second"]["name"])
@@ -285,7 +285,7 @@ class TestTask:
 
         assert DATA["tasks"]["first"]["name"] in page.content()
 
-        row_selector = f"*css=tr >> text=\"{DATA['tasks']['first']['name']}\""
+        row_selector = f'*css=tr >> text="{DATA["tasks"]["first"]["name"]}"'
         assert page.query_selector(row_selector) is not None
         row = page.query_selector(row_selector)
         link_selector = 'text="Удалить"'

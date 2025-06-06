@@ -48,4 +48,4 @@ fix:
 	uv run ruff check --fix
 
 hexlet_test:
-	uv run pytest tests/ --browser=chromium --slowmo=50   
+	uv run pytest tests/ --browser=chromium --slowmo=50
