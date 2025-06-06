@@ -1,6 +1,6 @@
 services:
   tm_app:
-    image: git.pressanybutton.ru/codeonanapkin/hexlet-4:latest
+    image: gitlab-dr.itsupport.host/whgaleon1/hexlet-last:latest
     container_name: tm_app
     command: >
       sh -c "make migrate &&
