@@ -12,7 +12,9 @@ permissions:
 jobs:
   linter:
     runs-on: self-hosted
-    
+    container:
+      image: catthehacker/ubuntu:act-22.04
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -34,6 +36,9 @@ jobs:
   
   tests:
     runs-on: self-hosted
+    container:
+      image: catthehacker/ubuntu:act-22.04
+
     needs: linter
     env:
       DATABASE_URL: sqlite:///db:sqlite3
@@ -83,8 +88,11 @@ jobs:
           make test-coverage
           
   build-and-push:
+
     runs-on: self-hosted
     needs: tests
+    container:
+      image: catthehacker/ubuntu:act-22.04
 
     steps:
       - name: Checkout repository
@@ -111,6 +119,8 @@ jobs:
     needs: build-and-push
 
     runs-on: self-hosted
+    container:
+      image: catthehacker/ubuntu:act-22.04
 
     steps:
       - name: Deploy on THIS VPS WHERE mounted GIT Runner
