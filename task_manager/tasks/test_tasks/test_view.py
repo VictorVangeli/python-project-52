@@ -44,7 +44,7 @@ class TestListTasks(TaskTestCase):
 
     def test_tasks_not_logged_in_view(self) -> None:
         """
-        Test that an unauthenticated user is redirected to the login page 
+        Test that an unauthenticated user is redirected to the login page
             when attempting to access the task list view.
         """
         self.client.logout()
@@ -128,7 +128,7 @@ class TestDetailedTask(TaskTestCase):
     def test_detailed_task_content(self) -> None:
         """
         Test that the detailed task view displays all relevant task information.
-        Verifies the presence of update/delete links, task fields, and 
+        Verifies the presence of update/delete links, task fields, and
             associated labels in the response.
         """
         response = self.client.get(reverse_lazy("task_show", kwargs={"pk": 3}))
@@ -215,7 +215,7 @@ class TestUpdateTaskView(TaskTestCase):
 class TestDeleteTaskView(TaskTestCase):
     def test_delete_task_view(self) -> None:
         """
-        Test that the task delete confirmation view is accessible to the task 
+        Test that the task delete confirmation view is accessible to the task
             author.
         Verifies the response status and that the correct template is used.
         """
@@ -230,7 +230,7 @@ class TestDeleteTaskView(TaskTestCase):
 
     def test_delete_task_not_logged_in_view(self) -> None:
         """
-        Test that an unauthenticated user is redirected to the login page 
+        Test that an unauthenticated user is redirected to the login page
             when attempting to access the task delete view.
         """
         self.client.logout()
@@ -244,7 +244,7 @@ class TestDeleteTaskView(TaskTestCase):
 
     def test_delete_task_unauthorised_view(self) -> None:
         """
-        Test that a logged-in user cannot access the task delete view for a 
+        Test that a logged-in user cannot access the task delete view for a
             task they do not own.
         Verifies redirection to the task list page.
         """

@@ -11,7 +11,7 @@ class TestCreateLabel(LabelTestCase):
         """
         Test that a new label is successfully created via the create view with
             valid data.
-        Verifies redirection, label count increment, and correctness of the 
+        Verifies redirection, label count increment, and correctness of the
             created label.
         """
         label_data = self.test_label["create"]["valid"].copy()
@@ -28,7 +28,7 @@ class TestCreateLabel(LabelTestCase):
     def test_create_fields_missing(self) -> None:
         """
         Test that label creation fails when required fields are missing.
-        Verifies that form errors are returned and no new label is added to the 
+        Verifies that form errors are returned and no new label is added to the
             database.
         """
         label_data = self.test_label["create"]["missing_fields"].copy()
@@ -67,9 +67,9 @@ class TestCreateLabel(LabelTestCase):
 
     def test_create_long_field(self) -> None:
         """
-        Test that label creation fails when the 'name' field exceeds the 
+        Test that label creation fails when the 'name' field exceeds the
             maximum allowed length.
-        Verifies that a validation error is returned and no new label is 
+        Verifies that a validation error is returned and no new label is
             created.
         """
         label_data = self.test_label["create"]["valid"].copy()

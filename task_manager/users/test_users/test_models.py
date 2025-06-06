@@ -5,7 +5,7 @@ from .testcase import UserTestCase
 class UserModelTest(UserTestCase):
     def test_user_creation(self) -> None:
         """Check that a User instance is created correctly and __str__ returns
-            full name."""
+        full name."""
         user_data = self.test_user["create"]["valid"].copy()
         full_name = user_data["first_name"] + " " + user_data["last_name"]
 

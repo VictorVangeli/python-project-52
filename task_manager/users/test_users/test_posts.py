@@ -105,7 +105,7 @@ class TestCreateUser(UserTestCase):
         Test user creation with fields exceeding maximum length.
 
         Verifies:
-        - Validation errors are raised for 'username', 'first_name', and 
+        - Validation errors are raised for 'username', 'first_name', and
             'last_name'
           when their lengths exceed 150 characters.
         - Appropriate error messages are shown for each field.

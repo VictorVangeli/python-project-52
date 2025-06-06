@@ -25,7 +25,7 @@ class TestCreateTask(TaskTestCase):
 
     def test_create_fields_missing(self) -> None:
         """
-        Test that the task creation form returns errors when required fields 
+        Test that the task creation form returns errors when required fields
             are missing.
         """
         task_data = self.test_task["create"]["missing_fields"].copy()

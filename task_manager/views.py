@@ -27,7 +27,7 @@ class UserLoginView(SuccessMessageMixin, LoginView):
     """
     Handle user login.
 
-    Renders the login form, authenticates the user, and redirects to the home 
+    Renders the login form, authenticates the user, and redirects to the home
         page upon success.
     Adds title and button text to the template context.
     """

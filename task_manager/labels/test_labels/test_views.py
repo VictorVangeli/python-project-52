@@ -30,7 +30,7 @@ class TestListLabels(LabelTestCase):
         """
         Test that the label list page contains links to create, update, and
             delete labels.
-        Verifies the presence of these links for each label in the response 
+        Verifies the presence of these links for each label in the response
             content.
         """
         response = self.client.get(reverse_lazy("labels"))
@@ -57,7 +57,7 @@ class TestListLabels(LabelTestCase):
 class TestCreateLabelView(LabelTestCase):
     def test_create_label_view(self) -> None:
         """
-        Test that the label creation view is accessible to an authenticated 
+        Test that the label creation view is accessible to an authenticated
             user.
         Verifies the response status and that the correct template is used.
         """
