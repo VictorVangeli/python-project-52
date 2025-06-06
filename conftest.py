@@ -51,10 +51,11 @@ def django_db_setup():
 
 
 def get_fixture_path(file_name):
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    return os.path.join(
-        current_dir, "../hexlet-code/tests", "fixtures", file_name
-    )
+    # current_dir = os.path.dirname(os.path.abspath(__file__))
+    return settings.BASE_DIR / "tests/fixtures" / file_name
+    # return os.path.join(
+    #     current_dir, "../hexlet-code/tests", "fixtures", file_name
+    # )
 
 
 def read(file_path):
