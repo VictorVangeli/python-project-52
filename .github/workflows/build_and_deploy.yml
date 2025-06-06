@@ -104,8 +104,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
           tags: ghcr.io/victorvangeli/python-project-52:latest
           provenance: false
 
