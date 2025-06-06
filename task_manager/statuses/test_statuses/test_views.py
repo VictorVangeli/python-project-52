@@ -77,7 +77,8 @@ class TestUpdateStatusView(StatusTestCase):
 class TestDeleteStatusView(StatusTestCase):
     def test_delete_status_view(self) -> None:
         """
-        Test that the status delete confirmation view is accessible to an authenticated user.
+        Test that the status delete confirmation view is accessible to an
+            authenticated user.
         Verifies the response status and that the correct template is used.
         """
         response = self.client.get(
@@ -91,7 +92,8 @@ class TestDeleteStatusView(StatusTestCase):
 
     def test_delete_status_not_logged_in_view(self) -> None:
         """
-        Test that an unauthenticated user is redirected to the login page when attempting to access the status delete view.
+        Test that an unauthenticated user is redirected to the login page when
+            attempting to access the status delete view.
         """
         self.client.logout()
 

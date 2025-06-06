@@ -9,16 +9,7 @@ from conftest import DATA
 @pytest.mark.usefixtures("load_users")
 class TestUser:
     def test_load_users(self, transactional_db, django_user_model):
-        # print(
-        #    f"\nМодель пользователя в тесте: {django_user_model.__module__}.{django_user_model.__name__}"
-        # )
-        # print(f"app_label в тесте: {django_user_model._meta.app_label}")
-
         users = django_user_model.objects.all()
-        # print(f"Запрос выполнен, получено пользователей: {len(users)}")
-
-        # for user in users:
-        #    print(f"- {user.username} (ID: {user.id})")
 
         assert len(users) == 3
 

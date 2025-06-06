@@ -19,7 +19,8 @@ remove_rollbar = modify_settings(
 
 def load_data(path):
     """
-    Load JSON data from a fixture file located in the 'task_manager/fixtures' directory.
+    Load JSON data from a fixture file located in the 'task_manager/fixtures'
+        directory.
 
     Args:
         path (str): Relative path to the fixture file (e.g., 'users.json').

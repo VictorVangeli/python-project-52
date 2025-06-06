@@ -28,8 +28,10 @@ class TestListLabels(LabelTestCase):
 
     def test_labels_links(self) -> None:
         """
-        Test that the label list page contains links to create, update, and delete labels.
-        Verifies the presence of these links for each label in the response content.
+        Test that the label list page contains links to create, update, and
+            delete labels.
+        Verifies the presence of these links for each label in the response 
+            content.
         """
         response = self.client.get(reverse_lazy("labels"))
 
@@ -41,7 +43,8 @@ class TestListLabels(LabelTestCase):
 
     def test_labels_not_logged_in_view(self) -> None:
         """
-        Test that an unauthenticated user is redirected to the login page when attempting to access the label list view.
+        Test that an unauthenticated user is redirected to the login page when
+            attempting to access the label list view.
         """
         self.client.logout()
 
@@ -54,7 +57,8 @@ class TestListLabels(LabelTestCase):
 class TestCreateLabelView(LabelTestCase):
     def test_create_label_view(self) -> None:
         """
-        Test that the label creation view is accessible to an authenticated user.
+        Test that the label creation view is accessible to an authenticated 
+            user.
         Verifies the response status and that the correct template is used.
         """
         response = self.client.get(reverse_lazy("label_create"))
@@ -64,7 +68,8 @@ class TestCreateLabelView(LabelTestCase):
 
     def test_create_label_not_logged_in_view(self) -> None:
         """
-        Test that an unauthenticated user is redirected to the login page when attempting to access the label creation view.
+        Test that an unauthenticated user is redirected to the login page when
+            attempting to access the label creation view.
         """
         self.client.logout()
 
@@ -89,7 +94,8 @@ class TestUpdateLabelView(LabelTestCase):
 
     def test_update_not_logged_in_view(self) -> None:
         """
-        Test that an unauthenticated user is redirected to the login page when attempting to access the label update view.
+        Test that an unauthenticated user is redirected to the login page when
+            attempting to access the label update view.
         """
         self.client.logout()
 
@@ -104,7 +110,8 @@ class TestUpdateLabelView(LabelTestCase):
 class TestDeleteLabelView(LabelTestCase):
     def test_delete_label_view(self) -> None:
         """
-        Test that the label delete confirmation view is accessible to an authenticated user.
+        Test that the label delete confirmation view is accessible to an
+            authenticated user.
         Verifies the response status and that the correct template is used.
         """
         response = self.client.get(
@@ -118,7 +125,8 @@ class TestDeleteLabelView(LabelTestCase):
 
     def test_delete_label_not_logged_in_view(self) -> None:
         """
-        Test that an unauthenticated user is redirected to the login page when attempting to access the label delete view.
+        Test that an unauthenticated user is redirected to the login page when
+            attempting to access the label delete view.
         """
         self.client.logout()
 

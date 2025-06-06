@@ -75,7 +75,8 @@ class AuthorDeletionMixin(UserPassesTestMixin):
     Mixin to restrict deletion to the item's author.
 
     Ensures that only the author of an object can delete it.
-    Displays an error message and redirects if the current user is not the author.
+    Displays an error message and redirects if the current user is not the
+        author.
     """
 
     author_message = None

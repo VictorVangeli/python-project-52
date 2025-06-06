@@ -84,7 +84,8 @@ class TestUpdateUserView(UserTestCase):
 
     def test_update_not_logged_in_view(self) -> None:
         """
-        Test that an unauthenticated user is redirected when trying to access the update view.
+        Test that an unauthenticated user is redirected when trying to access
+            the update view.
 
         Verifies:
         - Response status is 302 (redirect).
@@ -99,7 +100,8 @@ class TestUpdateUserView(UserTestCase):
 
     def test_update_other_view(self) -> None:
         """
-        Test that a logged-in user cannot access the update view of another user.
+        Test that a logged-in user cannot access the update view of another
+            user.
 
         Verifies:
         - Response status is 302 (redirect).
@@ -118,7 +120,8 @@ class TestUpdateUserView(UserTestCase):
 class TestDeleteUserView(UserTestCase):
     def test_delete_self_view(self) -> None:
         """
-        Test that a logged-in user can access their own delete confirmation view.
+        Test that a logged-in user can access their own delete confirmation
+            view.
 
         Verifies:
         - Response status is 200 (OK).
@@ -137,7 +140,8 @@ class TestDeleteUserView(UserTestCase):
 
     def test_delete_not_logged_in_view(self) -> None:
         """
-        Test that an unauthenticated user is redirected when accessing the delete view.
+        Test that an unauthenticated user is redirected when accessing the
+            delete view.
 
         Verifies:
         - Response status is 302 (redirect).
@@ -152,7 +156,8 @@ class TestDeleteUserView(UserTestCase):
 
     def test_delete_other_view(self) -> None:
         """
-        Test that a user cannot access the delete view for another user's profile.
+        Test that a user cannot access the delete view for another user's
+            profile.
 
         Verifies:
         - Logged-in user1 is not allowed to view delete page for user3.

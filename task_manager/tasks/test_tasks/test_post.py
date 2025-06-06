@@ -9,7 +9,8 @@ from .testcase import TaskTestCase
 class TestCreateTask(TaskTestCase):
     def test_create_valid_task(self) -> None:
         """
-        Test that a valid task is successfully created via the task creation view.
+        Test that a valid task is successfully created via the task creation
+            view.
         """
         task_data = self.test_task["create"]["valid"].copy()
         response = self.client.post(reverse_lazy("task_create"), data=task_data)
@@ -24,7 +25,8 @@ class TestCreateTask(TaskTestCase):
 
     def test_create_fields_missing(self) -> None:
         """
-        Test that the task creation form returns errors when required fields are missing.
+        Test that the task creation form returns errors when required fields 
+            are missing.
         """
         task_data = self.test_task["create"]["missing_fields"].copy()
         response = self.client.post(reverse_lazy("task_create"), data=task_data)
@@ -45,7 +47,8 @@ class TestCreateTask(TaskTestCase):
 
     def test_create_task_exists(self) -> None:
         """
-        Test that creating a task with a duplicate name returns a validation error.
+        Test that creating a task with a duplicate name returns a validation
+            error.
         """
         task_data = self.test_task["create"]["exists"].copy()
         response = self.client.post(reverse_lazy("task_create"), data=task_data)
@@ -109,8 +112,10 @@ class TestUpdateTask(TaskTestCase):
 
     def test_update_task_not_logged_in(self) -> None:
         """
-        Test that an unauthenticated user is redirected to the login page when attempting to update a task.
-        Also verifies that the task is not modified and the task count remains unchanged.
+        Test that an unauthenticated user is redirected to the login page when
+            attempting to update a task.
+        Also verifies that the task is not modified and the task count remains
+            unchanged.
         """
         self.client.logout()
 
@@ -132,7 +137,8 @@ class TestDeleteTask(TaskTestCase):
     def test_delete_task(self) -> None:
         """
         Test that an authenticated user can successfully delete a task.
-        Verifies redirection to the task list and confirms the task is removed from the database.
+        Verifies redirection to the task list and confirms the task is removed
+            from the database.
         """
         response = self.client.post(
             reverse_lazy("task_delete", kwargs={"pk": 1})
@@ -146,7 +152,8 @@ class TestDeleteTask(TaskTestCase):
 
     def test_delete_task_not_logged_in(self) -> None:
         """
-        Test that an unauthenticated user is redirected to the login page when attempting to delete a task.
+        Test that an unauthenticated user is redirected to the login page when
+            attempting to delete a task.
         Also ensures that the task is not deleted from the database.
         """
         self.client.logout()
@@ -162,7 +169,8 @@ class TestDeleteTask(TaskTestCase):
     def test_delete_task_unauthorised(self) -> None:
         """
         Test that a logged-in user cannot delete a task they do not own.
-        Verifies redirection to the task list and ensures the task remains in the database.
+        Verifies redirection to the task list and ensures the task remains in
+            the database.
         """
         response = self.client.post(
             reverse_lazy("task_delete", kwargs={"pk": 3})

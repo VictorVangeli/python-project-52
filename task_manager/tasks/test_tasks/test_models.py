@@ -7,7 +7,8 @@ from .testcase import TaskTestCase
 class TaskModelTest(TaskTestCase):
     def test_task_creation(self) -> None:
         """
-        Test that a Task instance is created correctly with all fields and labels.
+        Test that a Task instance is created correctly with all fields and
+            labels.
         """
         task_data = self.test_task["create"]["valid"].copy()
 

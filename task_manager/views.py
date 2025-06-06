@@ -11,7 +11,8 @@ class IndexView(TemplateView):
     """
     Display the homepage of the task manager.
 
-    This view renders the main index page and sets the page title in the context.
+    This view renders the main index page and sets the page title in the
+        context.
     """
 
     template_name = "index.html"
@@ -26,7 +27,8 @@ class UserLoginView(SuccessMessageMixin, LoginView):
     """
     Handle user login.
 
-    Renders the login form, authenticates the user, and redirects to the home page upon success.
+    Renders the login form, authenticates the user, and redirects to the home 
+        page upon success.
     Adds title and button text to the template context.
     """
 

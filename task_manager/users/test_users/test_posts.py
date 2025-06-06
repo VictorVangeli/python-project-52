@@ -29,7 +29,8 @@ class TestCreateUser(UserTestCase):
         Test user creation with missing required fields.
 
         Verifies:
-        - Form returns appropriate 'required field' errors for username, first_name, and last_name.
+        - Form returns appropriate 'required field' errors for username,
+            first_name, and last_name.
         - User is not created in the database.
         - Response status code is 200 (form re-rendered with errors).
         """
@@ -55,7 +56,8 @@ class TestCreateUser(UserTestCase):
         Test user creation with an invalid username.
 
         Verifies:
-        - The form returns an appropriate validation error for the 'username' field.
+        - The form returns an appropriate validation error for the 'username'
+            field.
         - No new user is created in the database.
         - The response status code is 200 (form re-rendered with errors).
         """
@@ -103,7 +105,8 @@ class TestCreateUser(UserTestCase):
         Test user creation with fields exceeding maximum length.
 
         Verifies:
-        - Validation errors are raised for 'username', 'first_name', and 'last_name'
+        - Validation errors are raised for 'username', 'first_name', and 
+            'last_name'
           when their lengths exceed 150 characters.
         - Appropriate error messages are shown for each field.
         - No user is created in the database.
@@ -158,7 +161,8 @@ class TestCreateUser(UserTestCase):
         Test user creation with missing passwords.
 
         Verifies:
-        - Validation errors are raised for both 'password1' and 'password2' when omitted.
+        - Validation errors are raised for both 'password1' and 'password2'
+            when omitted.
         - Correct error message is displayed for each missing password field.
         - No user is created in the database.
         - Response status is 200 with form errors rendered.
@@ -182,7 +186,8 @@ class TestCreateUser(UserTestCase):
         Test user creation with non-matching passwords.
 
         Verifies:
-        - A validation error is raised for 'password2' when passwords do not match.
+        - A validation error is raised for 'password2' when passwords do not
+            match.
         - Correct error message is displayed.
         - No user is created in the database.
         - Response status is 200 with form errors shown.

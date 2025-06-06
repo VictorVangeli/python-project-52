@@ -49,8 +49,8 @@ class HomePageTestCase(HomeTestCase):
 
     def test_header_links_logged_in(self) -> None:
         """
-        Test that authenticated users see links to statuses, labels, tasks, and logout,
-        and do not see the login link.
+        Test that authenticated users see links to statuses, labels, tasks, 
+            and logout, and do not see the login link.
         """
         self.client.force_login(self.user)
         response = self.client.get(reverse_lazy("home"))
@@ -83,8 +83,9 @@ class TestLoginUser(HomeTestCase):
     """
     Test case for the login functionality.
 
-    This class tests the accessibility of the login view and the login process itself,
-    ensuring that a user can authenticate successfully and is redirected to the homepage.
+    This class tests the accessibility of the login view and the login process  
+        itself, ensuring that a user can authenticate successfully and is 
+        redirected to the homepage.
     """
 
     def test_user_login_view(self) -> None:

@@ -16,7 +16,8 @@ class TestListTasks(TaskTestCase):
 
     def test_tasks_content(self) -> None:
         """
-        Test that the task list view returns the correct number of tasks for the user.
+        Test that the task list view returns the correct number of tasks for
+            the user.
         Verifies the tasks in the context match the expected queryset.
         """
         response = self.client.get(reverse_lazy("tasks"))
@@ -28,8 +29,10 @@ class TestListTasks(TaskTestCase):
 
     def test_tasks_links(self) -> None:
         """
-        Test that the task list page contains links to create, update, and delete tasks.
-        Verifies the presence of these links for each task in the response content.
+        Test that the task list page contains links to create, update, and
+            delete tasks.
+        Verifies the presence of these links for each task in the response
+            content.
         """
         response = self.client.get(reverse_lazy("tasks"))
 
@@ -41,7 +44,8 @@ class TestListTasks(TaskTestCase):
 
     def test_tasks_not_logged_in_view(self) -> None:
         """
-        Test that an unauthenticated user is redirected to the login page when attempting to access the task list view.
+        Test that an unauthenticated user is redirected to the login page 
+            when attempting to access the task list view.
         """
         self.client.logout()
 
@@ -55,7 +59,8 @@ class TestFilterTasks(TaskTestCase):
     def test_filter_tasks_by_status(self) -> None:
         """
         Test that tasks can be filtered by status in the task list view.
-        Verifies that only tasks with the specified status are included in the response.
+        Verifies that only tasks with the specified status are included in the
+            response.
         """
         response = self.client.get(
             reverse_lazy("tasks"), {"status": self.status1.pk}
@@ -69,7 +74,8 @@ class TestFilterTasks(TaskTestCase):
     def test_filter_tasks_by_executor(self) -> None:
         """
         Test that tasks can be filtered by executor in the task list view.
-        Verifies that only tasks assigned to the specified executor are displayed.
+        Verifies that only tasks assigned to the specified executor are
+            displayed.
         """
         response = self.client.get(
             reverse_lazy("tasks"), {"executor": self.user1.pk}
@@ -95,7 +101,8 @@ class TestFilterTasks(TaskTestCase):
 
     def test_filter_tasks_by_own_tasks(self) -> None:
         """
-        Test that the 'own tasks' filter returns only tasks created by the current user.
+        Test that the 'own tasks' filter returns only tasks created by the
+            current user.
         Verifies that tasks created by others are excluded from the result.
         """
         response = self.client.get(reverse_lazy("tasks"), {"own_tasks": "on"})
@@ -109,7 +116,8 @@ class TestFilterTasks(TaskTestCase):
 class TestDetailedTask(TaskTestCase):
     def test_detailed_task_view(self) -> None:
         """
-        Test that the detailed view of a task is accessible to an authenticated user.
+        Test that the detailed view of a task is accessible to an authenticated
+            user.
         Verifies the response status and that the correct template is used.
         """
         response = self.client.get(reverse_lazy("task_show", kwargs={"pk": 3}))
@@ -120,7 +128,8 @@ class TestDetailedTask(TaskTestCase):
     def test_detailed_task_content(self) -> None:
         """
         Test that the detailed task view displays all relevant task information.
-        Verifies the presence of update/delete links, task fields, and associated labels in the response.
+        Verifies the presence of update/delete links, task fields, and 
+            associated labels in the response.
         """
         response = self.client.get(reverse_lazy("task_show", kwargs={"pk": 3}))
 
@@ -140,7 +149,8 @@ class TestDetailedTask(TaskTestCase):
 
     def test_detailed_task_not_logged_in(self) -> None:
         """
-        Test that an unauthenticated user is redirected to the login page when attempting to view task details.
+        Test that an unauthenticated user is redirected to the login page when
+            attempting to view task details.
         """
         self.client.logout()
 
@@ -163,7 +173,8 @@ class TestCreateTaskView(TaskTestCase):
 
     def test_create_task_not_logged_in_view(self) -> None:
         """
-        Test that an unauthenticated user is redirected to the login page when attempting to access the task creation view.
+        Test that an unauthenticated user is redirected to the login page when
+            attempting to access the task creation view.
         """
         self.client.logout()
 
@@ -188,7 +199,8 @@ class TestUpdateTaskView(TaskTestCase):
 
     def test_update_not_logged_in_view(self) -> None:
         """
-        Test that an unauthenticated user is redirected to the login page when attempting to access the task update view.
+        Test that an unauthenticated user is redirected to the login page when
+            attempting to access the task update view.
         """
         self.client.logout()
 
@@ -203,7 +215,8 @@ class TestUpdateTaskView(TaskTestCase):
 class TestDeleteTaskView(TaskTestCase):
     def test_delete_task_view(self) -> None:
         """
-        Test that the task delete confirmation view is accessible to the task author.
+        Test that the task delete confirmation view is accessible to the task 
+            author.
         Verifies the response status and that the correct template is used.
         """
         response = self.client.get(
@@ -217,7 +230,8 @@ class TestDeleteTaskView(TaskTestCase):
 
     def test_delete_task_not_logged_in_view(self) -> None:
         """
-        Test that an unauthenticated user is redirected to the login page when attempting to access the task delete view.
+        Test that an unauthenticated user is redirected to the login page 
+            when attempting to access the task delete view.
         """
         self.client.logout()
 
@@ -230,7 +244,8 @@ class TestDeleteTaskView(TaskTestCase):
 
     def test_delete_task_unauthorised_view(self) -> None:
         """
-        Test that a logged-in user cannot access the task delete view for a task they do not own.
+        Test that a logged-in user cannot access the task delete view for a 
+            task they do not own.
         Verifies redirection to the task list page.
         """
         response = self.client.get(
