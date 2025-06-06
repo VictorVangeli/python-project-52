@@ -32,6 +32,9 @@ run:
 generate-ru-local:
 	uv run django-admin makemessages -l ru
 
+compile-ru-local:
+	uv run django-admin compilemessages
+
 render-start:
 	uv run gunicorn -b 0.0.0.0:8000 task_manager.wsgi
 
@@ -43,3 +46,6 @@ lint_pre-commit:
 
 fix:
 	uv run ruff check --fix
+
+hexlet_test:
+	uv run pytest tests/ --browser=chromium --slowmo=50   
