@@ -7,3 +7,6 @@ __pycache__/
 Caddyfile
 .DS_Store
 /staticfiles/
+db.sqlite3
+coverage.xml
+/tmp

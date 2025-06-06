@@ -73,7 +73,7 @@ jobs:
 
       - name: Create settings file
         run: |
-          mv .env.example .env
+          cp .env.example .env
 
 
       - name: Create migrate
