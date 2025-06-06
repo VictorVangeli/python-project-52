@@ -1,6 +1,6 @@
 services:
   tm_app:
-    image: ghcr.io/victorvangeli/python-project-52:latest
+    image: git.pressanybutton.ru/codeonanapkin/hexlet-4:latest
     container_name: tm_app
     command: >
       sh -c "make migrate &&
