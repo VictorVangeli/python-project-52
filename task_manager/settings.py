@@ -34,7 +34,12 @@ SECRET_KEY = (
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "webserver", "task-manager-52.pupsidian.ru", "127.0.0.1"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "webserver",
+    "task-manager-52.pupsidian.ru",
+    "127.0.0.1",
+]
 
 
 # Application definition
@@ -89,9 +94,9 @@ WSGI_APPLICATION = "task_manager.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3',
+DATABASES = {  # noqa
+    "default": dj_database_url.config(
+        default="sqlite:///db.sqlite3",
         conn_max_age=600,
         conn_health_checks=True,
     ),
